@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Priyankaaa💫</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .font-tangerine { font-family: 'Tangerine', cursive; }
+
+        .hero-bg {
+            background-color: #0c194b;
+            background-image:
+                radial-gradient(ellipse at 30% 20%, #1b3a91 0%, transparent 70%),
+                radial-gradient(ellipse at 70% 80%, #573a9e 0%, transparent 70%),
+                radial-gradient(ellipse at 90% 10%, #3a1b91 0%, transparent 70%);
+            overflow-x: hidden;
+            position: relative;
+        }
+        .peacock-feather {
+            position: absolute;
+            top: -50px; right: -80px;
+            width: 300px; height: 300px;
+            transform-origin: bottom right;
+            animation: sway 12s ease-in-out infinite;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        @keyframes sway {
+            0%, 100% { transform: rotate(15deg); }
+            50% { transform: rotate(-5deg); }
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1); }
+        }
+        .lantern {
+            position: fixed;
+            bottom: -100px;
+            width: 25px; height: 35px;
+            background: radial-gradient(ellipse at 50% 40%, #FFD700, #F59E0B);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            border-radius: 8px 8px 3px 3px;
+            box-shadow: 0 0 20px 8px rgba(251, 191, 36, 0.5);
+            animation: floatUp 15s linear forwards;
+            z-index: 10;
+        }
+        @keyframes floatUp {
+            from { transform: translateX(0) scale(0.8); opacity: 0.9; bottom: -100px; }
+            to { transform: translateX(calc(var(--sway) * 1px)) scale(1.2); opacity: 0; bottom: 110vh; }
+        }
+        .confetti {
+            position: fixed;
+            width: 10px; height: 10px;
+            opacity: 0.7;
+            animation: fall 5s linear forwards;
+            z-index: 100;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .card {
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+        .card.is-flipped { transform: rotateY(180deg); }
+        .card-face, .card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .card-back { transform: rotateY(180deg); }
+        .flute-hole:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px 5px rgba(255, 223, 186, 0.7);
+        }
+        .diya-flame {
+            position: absolute; bottom: 60%; left: 50%;
+            transform: translateX(-50%);
+            width: 20px; height: 40px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,165,0,0.8) 40%, rgba(255,140,0,0.5) 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 20px 10px rgba(255, 165, 0, 0.7);
+            animation: flicker 1.5s ease-in-out infinite;
+            transform-origin: bottom; opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .diya-flame.lit { opacity: 1; }
+        @keyframes flicker {
+            0%, 100% { transform: translateX(-50%) scaleY(1) rotate(0deg); }
+            50% { transform: translateX(-51%) scaleY(1.05) rotate(-1deg); }
+        }
+        .melody-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .melody-card:hover { transform: translateY(-10px); }
+        .melody-card.playing {
+            box-shadow: 0 0 35px 10px rgba(251, 191, 36, 0.5);
+            transform: translateY(-10px);
+        }
+        #dahi-handi {
+            position: absolute; top: 20%; left: 50%;
+            width: 100px; cursor: pointer;
+            animation: sway-pot 4s ease-in-out infinite;
+            transform-origin: top center;
+        }
+        @keyframes sway-pot {
+            0%, 100% { transform: translateX(-50%) rotate(15deg); }
+            50% { transform: translateX(-50%) rotate(-15deg); }
+        }
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .modal-content { transition: transform 0.3s ease, opacity 0.3s ease; }
+    </style>
+</head>
+
+<body class="hero-bg text-white leading-relaxed">
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center p-6 text-center relative">
+        <div id="star-container" class="absolute inset-0"></div>
+        <div class="peacock-feather">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#2E8B57" d="M100 0 C50 50, 50 150, 100 200 C150 150, 150 50, 100 0 Z"/>
+                <circle cx="100" cy="100" r="30" fill="#4169E1"/><circle cx="100" cy="100" r="20" fill="#00008B"/><circle cx="100" cy="100" r="10" fill="#FFD700"/>
+            </svg>
+        </div>
+        <div class="z-10">
+            <h1 class="font-tangerine text-7xl md:text-9xl text-amber-300 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">Happy Birthday</h1>
+            <p id="birthday-person-name" class="text-4xl md:text-6xl mt-4 text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">Priyankaaa💫</p>
+            <p class="mt-6 max-w-2xl text-lg text-gray-300">On this auspicious day, may the divine blessings of Lord Krishna fill your life with eternal joy, love, and serenity.</p>
+        </div>
+    </section>
+
+    <section id="wishes" class="py-20 px-6 bg-slate-900/30 backdrop-blur-sm">
+        <div class="container mx-auto text-center">
+            <h2 class="font-tangerine text-6xl text-amber-300 mb-2">Divine Wishes</h2>
+            <p class="text-gray-300 mb-12">Click on a card to reveal a special message for you.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="h-64 perspective-[1000px] cursor-pointer" onclick="this.querySelector('.card').classList.toggle('is-flipped')">
+                    <div class="card relative w-full h-full">
+                        <div class="card-face absolute w-full h-full flex flex-col justify-center items-center bg-blue-900/50 rounded-lg border-2 border-amber-300/50 p-4">
+                            <svg class="w-24 h-24 text-pink-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 3.5c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5S14.5 10.485 14.5 8 12.485 3.5 10 3.5zm0-2C13.59 1.5 16.5 4.41 16.5 8s-2.91 6.5-6.5 6.5S3.5 11.59 3.5 8 6.41 1.5 10 1.5z M2 10.5a8 8 0 1116 0 8 8 0 01-16 0zM10 18c-5.91 0-7.34-3.58-7.5-4.5h15c-.16 1-1.59 4.5-7.5 4.5z"/></svg>
+                            <p class="mt-4 font-semibold text-lg">Melody of Joy</p>
+                        </div>
+                        <div class="card-back absolute w-full h-full flex justify-center items-center bg-pink-900/50 rounded-lg border-2 border-amber-300/50 p-6 text-center">
+                            <p>May your life be as melodious and enchanting as Krishna's divine flute, filling every moment with happiness and peace.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-64 perspective-[1000px] cursor-pointer" onclick="this.querySelector('.card').classList.toggle('is-flipped')">
+                    <div class="card relative w-full h-full">
+                        <div class="card-face absolute w-full h-full flex flex-col justify-center items-center bg-blue-900/50 rounded-lg border-2 border-amber-300/50 p-4">
+                            <svg class="w-24 h-24 text-sky-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M15.998 8.998a.5.5 0 01.447.72l-4.002 7.003a.5.5 0 01-.894-.002l-1.999-3.5a.5.5 0 01.446-.721h2.553l-3.002-5.003a.5.5 0 01.447-.721l6.002 2.5a.5.5 0 01.448.721l-2 3h2.553zM6.914 1.5a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V2a.5.5 0 01.5-.5zm4.5 0a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V2a.5.5 0 01.5-.5zm-7 3a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V5a.5.5 0 01.5-.5zm4.5 0a.5.5 0 01.5.5v2.5a.5.5 0 01-1 0V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/></svg>
+                            <p class="mt-4 font-semibold text-lg">Infinite Love</p>
+                        </div>
+                        <div class="card-back absolute w-full h-full flex justify-center items-center bg-sky-900/50 rounded-lg border-2 border-amber-300/50 p-6 text-center">
+                            <p>Just as Radha's love for Krishna knows no bounds, may you be surrounded by infinite and unconditional love today and always.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-64 perspective-[1000px] cursor-pointer" onclick="this.querySelector('.card').classList.toggle('is-flipped')">
+                    <div class="card relative w-full h-full">
+                        <div class="card-face absolute w-full h-full flex flex-col justify-center items-center bg-blue-900/50 rounded-lg border-2 border-amber-300/50 p-4">
+                            <svg class="w-24 h-24 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14l-3-3 1.41-1.41L11 13.17l4.59-4.59L17 10l-6 6z"></path></svg>
+                            <p class="mt-4 font-semibold text-lg">Divine Protection</p>
+                        </div>
+                        <div class="card-back absolute w-full h-full flex justify-center items-center bg-green-900/50 rounded-lg border-2 border-amber-300/50 p-6 text-center">
+                            <p>Like Krishna lifted the Govardhan Hill, may you always be shielded from life's troubles and challenges.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="flute" class="py-20 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="font-tangerine text-6xl text-amber-300 mb-2">Play a Birthday Melody</h2>
+            <p class="text-gray-300 mb-12">Click the holes of the Bansuri to create a sweet tune.</p>
+            <div class="max-w-3xl mx-auto bg-yellow-800/60 p-4 rounded-full shadow-lg flex justify-around items-center">
+                <div class="flute-end w-8 h-12 bg-yellow-900 rounded-l-full"></div>
+                <div class="flute-hole w-10 h-10 rounded-full bg-black/70 cursor-pointer transition-all duration-200" data-note="C4"></div>
+                <div class="flute-hole w-10 h-10 rounded-full bg-black/70 cursor-pointer transition-all duration-200" data-note="D4"></div>
+                <div class="flute-hole w-10 h-10 rounded-full bg-black/70 cursor-pointer transition-all duration-200" data-note="E4"></div>
+                <div class="flute-hole w-10 h-10 rounded-full bg-black/70 cursor-pointer transition-all duration-200" data-note="F4"></div>
+                <div class="flute-hole w-10 h-10 rounded-full bg-black/70 cursor-pointer transition-all duration-200" data-note="G4"></div>
+                <div class="flute-hole w-10 h-10 rounded-full bg-black/70 cursor-pointer transition-all duration-200" data-note="A4"></div>
+                <div class="flute-hole w-10 h-10 rounded-full bg-black/70 cursor-pointer transition-all duration-200" data-note="B4"></div>
+                <div class="flute-end w-8 h-12 bg-yellow-900 rounded-r-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="diya" class="py-20 px-6 bg-slate-900/30 backdrop-blur-sm">
+        <div class="container mx-auto text-center">
+            <h2 class="font-tangerine text-6xl text-amber-300 mb-2">A Prayer of Light</h2>
+            <p class="text-gray-300 mb-12">Make a wish and light a diya for a future filled with brightness.</p>
+            <div class="relative inline-block">
+                <svg class="w-48 h-auto" viewBox="0 0 100 50">
+                    <path d="M 10 40 Q 50 50 90 40 C 70 55, 30 55, 10 40" fill="#CD853F"/>
+                    <path d="M 20 40 Q 50 30 80 40 C 70 45, 30 45, 20 40" fill="#D2B48C"/>
+                </svg>
+                <div id="diya-flame" class="diya-flame"></div>
+            </div>
+            <button id="light-diya-btn" class="block mx-auto mt-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
+                Light the Diya
+            </button>
+        </div>
+    </section>
+
+    <section id="melodies" class="py-20 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="font-tangerine text-6xl text-amber-300 mb-2">Melodies of Serenity</h2>
+            <p class="text-gray-300 mb-12">Close your eyes, and let the divine music fill your soul.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="melody-card bg-purple-900/40 p-6 rounded-lg border border-amber-300/30" data-melody="vrindavan">
+                    <img src="https://images.pexels.com/photos/1078779/pexels-photo-1078779.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Vrindavan Dawn" class="rounded-md mb-4 aspect-video object-cover w-full">
+                    <h3 class="text-2xl font-semibold mb-2 text-amber-200">Flute of Vrindavan</h3>
+                    <button class="melody-play-btn bg-amber-400 text-purple-900 rounded-full p-3 hover:bg-amber-300 transition-colors">
+                        <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path></svg>
+                        <svg class="w-6 h-6 pause-icon hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M5.75 4.5a.75.75 0 00-.75.75v10.5a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75zM14.25 4.5a.75.75 0 00-.75.75v10.5a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75z"></path></svg>
+                    </button>
+                </div>
+                <div class="melody-card bg-sky-900/40 p-6 rounded-lg border border-amber-300/30" data-melody="yamuna">
+                    <img src="https://images.pexels.com/photos/1655166/pexels-photo-1655166.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Flowing Yamuna" class="rounded-md mb-4 aspect-video object-cover w-full">
+                    <h3 class="text-2xl font-semibold mb-2 text-amber-200">River Yamuna's Serenade</h3>
+                    <button class="melody-play-btn bg-amber-400 text-sky-900 rounded-full p-3 hover:bg-amber-300 transition-colors">
+                        <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path></svg>
+                        <svg class="w-6 h-6 pause-icon hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M5.75 4.5a.75.75 0 00-.75.75v10.5a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75zM14.25 4.5a.75.75 0 00-.75.75v10.5a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75z"></path></svg>
+                    </button>
+                </div>
+                <div class="melody-card bg-green-900/40 p-6 rounded-lg border border-amber-300/30" data-melody="gokul">
+                    <img src="https://images.pexels.com/photos/673857/pexels-photo-673857.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Gokul Celebration" class="rounded-md mb-4 aspect-video object-cover w-full">
+                    <h3 class="text-2xl font-semibold mb-2 text-amber-200">Gokul's Joyful Chant</h3>
+                    <button class="melody-play-btn bg-amber-400 text-green-900 rounded-full p-3 hover:bg-amber-300 transition-colors">
+                        <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path></svg>
+                        <svg class="w-6 h-6 pause-icon hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M5.75 4.5a.75.75 0 00-.75.75v10.5a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75zM14.25 4.5a.75.75 0 00-.75.75v10.5a.75.75 0 001.5 0V5.25a.75.75 0 00-.75-.75z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="game" class="py-20 px-6 bg-slate-900/30 backdrop-blur-sm">
+        <div class="container mx-auto text-center">
+            <h2 class="font-tangerine text-6xl text-amber-300 mb-2">Krishna's Fun Leela</h2>
+            <p id="game-subtitle" class="text-gray-300 mb-8">Help break the Dahi Handi! You need 15 hits in 10 seconds.</p>
+            <div id="game-area" class="relative w-full max-w-md mx-auto h-64 bg-black/20 rounded-lg p-4">
+                <div id="dahi-handi-container">
+                    <svg id="dahi-handi" viewBox="0 0 100 120">
+                        <path d="M20,40 C20,65 80,65 80,40 L85,30 Q50,0 15,30 Z" fill="#D2B48C"/>
+                        <path d="M20,40 Q50,80 80,40" fill="#8B4513"/>
+                        <text x="50" y="60" font-size="20" fill="white" text-anchor="middle" id="handi-clicks">0</text>
+                    </svg>
+                </div>
+                 <div id="game-message" class="absolute inset-0 flex items-center justify-center text-4xl font-bold text-yellow-300 hidden"></div>
+            </div>
+            <button id="start-game-btn" class="mt-8 bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-transform duration-300">Start Game</button>
+        </div>
+    </section>
+
+    <section id="gift" class="py-20 px-6 bg-slate-900/50">
+        <div class="container mx-auto text-center">
+            <h2 class="font-tangerine text-6xl text-amber-300 mb-2">A Gift from the Heart</h2>
+            <p class="text-gray-300 mb-12">The final and most special blessing awaits you.</p>
+            <button id="open-gift-btn" class="cursor-pointer hover:scale-110 transition-transform duration-300">
+                <svg class="w-48 h-48 text-amber-300 drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a2 2 0 00-2 2v1H6a2 2 0 00-2 2v9a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2V4a2 2 0 00-2-2zM8 4h4v1H8V4z"/><path d="M10.152 6.192a1 1 0 00-1.302 0l-1.38 1.38a1 1 0 000 1.414l.115.115a.5.5 0 010 .707l-.115.115a1 1 0 000 1.414l1.38 1.38a1 1 0 001.414 0l.115-.115a.5.5 0 01.707 0l.115.115a1 1 0 001.414 0l1.38-1.38a1 1 0 000-1.414l-.115-.115a.5.5 0 010-.707l.115-.115a1 1 0 000-1.414l-1.38-1.38a1 1 0 00-.112-.108zM10 12a2 2 0 110-4 2 2 0 010 4z"/></svg>
+            </button>
+        </div>
+    </section>
+
+    <div id="gift-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none modal-overlay">
+        <div class="bg-gradient-to-br from-blue-900 to-purple-900 border-2 border-amber-300/50 rounded-lg shadow-2xl w-full max-w-lg p-8 text-center relative transform scale-95 opacity-0 modal-content">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-white hover:text-amber-300 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="font-tangerine text-5xl text-amber-300 mb-4">For You...</h3>
+            <p class="text-gray-300 text-lg">Your presence is like a blessing I cherish every day. You bring a light that is as divine and beautiful as Krishna's own smile. May your journey ahead be filled with endless love, laughter, and success. Happy Birthday, Priyankaaa💫. You mean a lot.</p>
+        </div>
+    </div>
+    
+    <footer class="text-center p-6 text-gray-500 text-sm">
+        <p>Made with devotion and love, inspired by the eternal Leela.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let audioInitialized = false;
+        let synthFlute, diyaSynth, melodyPlayers, winSound;
+        let currentMelody = null; 
+
+        async function initializeAudio() {
+            if (audioInitialized) return;
+            await Tone.start();
+            
+            synthFlute = new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.1, decay: 0.2, sustain: 0.5, release: 1 } }).toDestination();
+            diyaSynth = new Tone.MonoSynth({ oscillator: { type: "sine" }, envelope: { attack: 0.5, decay: 0.1, sustain: 0.8, release: 0.8 }, filterEnvelope: { attack: 0.05, decay: 0.2, sustain: 0.5, release: 2, baseFrequency: 300, octaves: 4 } }).toDestination();
+            winSound = new Tone.Player("https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/success.mp3").toDestination();
+            
+            melodyPlayers = {
+                vrindavan: new Tone.Player({ url: "./audio/hk.m4a", loop: true }).toDestination(),
+                yamuna: new Tone.Player({ url: "./audio/rr.m4a", loop: true }).toDestination(),
+                gokul: new Tone.Player({ url: "./audio/lk.m4a", loop: true }).toDestination()
+            };
+            
+            audioInitialized = true;
+            console.log("Audio Context is ready.");
+        }
+
+        function createStars() {
+            const container = document.getElementById('star-container');
+            if (!container) return;
+            container.innerHTML = '';
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 2.5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${2 + Math.random() * 3}s`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                container.appendChild(star);
+            }
+        }
+        
+        function createLantern() {
+            const lantern = document.createElement('div');
+            lantern.className = 'lantern';
+            lantern.style.left = `${Math.random() * 100}%`;
+            lantern.style.setProperty('--sway', (Math.random() - 0.5) * 200);
+            lantern.style.animationDuration = `${10 + Math.random() * 10}s`;
+            document.body.appendChild(lantern);
+            setTimeout(() => {
+                lantern.remove();
+            }, 20000);
+        }
+
+        function triggerConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = `${-20 - Math.random() * 20}px`;
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 90%, 60%)`;
+                confetti.style.animationDuration = `${3 + Math.random() * 2}s`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        document.querySelectorAll('.flute-hole').forEach(hole => {
+            hole.addEventListener('click', async () => {
+                await initializeAudio();
+                synthFlute.triggerAttackRelease(hole.dataset.note, '8n');
+                hole.style.backgroundColor = 'rgba(255, 223, 186, 0.5)';
+                setTimeout(() => { hole.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; }, 200);
+            });
+        });
+
+        document.getElementById('light-diya-btn').addEventListener('click', async function() {
+            await initializeAudio();
+            const flame = document.getElementById('diya-flame');
+            if (!flame.classList.contains('lit')) {
+                flame.classList.add('lit');
+                this.textContent = 'Wish Fulfilled!';
+                this.disabled = true;
+                diyaSynth.triggerAttackRelease("C5", "1");
+                for(let i=0; i<5; i++) {
+                    setTimeout(createLantern, i * 500);
+                }
+            }
+        });
+        
+        document.querySelectorAll('.melody-play-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                await initializeAudio(); 
+
+                const card = button.closest('.melody-card');
+                const melodyKey = card.dataset.melody;
+                const isThisSongPlaying = (currentMelody === melodyKey);
+
+                if (currentMelody && melodyPlayers[currentMelody].state === "started") {
+                    melodyPlayers[currentMelody].stop();
+                }
+
+                document.querySelectorAll('.melody-card').forEach(otherCard => {
+                    otherCard.classList.remove('playing');
+                    otherCard.querySelector('.play-icon').classList.remove('hidden');
+                    otherCard.querySelector('.pause-icon').classList.add('hidden');
+                });
+
+                if (isThisSongPlaying) {
+                    currentMelody = null;
+                } else {
+                    if (melodyPlayers[melodyKey].loaded) {
+                        melodyPlayers[melodyKey].start();
+                        card.classList.add('playing');
+                        button.querySelector('.play-icon').classList.add('hidden');
+                        button.querySelector('.pause-icon').classList.remove('hidden');
+                      
+                        currentMelody = melodyKey;
+                    } else {
+                        console.error(`Audio file for ${melodyKey} is not loaded. Check the file path.`);
+                        alert(`Could not load the melody. Please check the audio file path and your internet connection.`);
+                    }
+                }
+            });
+        });
+
+        const startGameBtn = document.getElementById('start-game-btn');
+        const dahiHandi = document.getElementById('dahi-handi');
+        const handiClicksEl = document.getElementById('handi-clicks');
+        const gameMessage = document.getElementById('game-message');
+        const handiContainer = document.getElementById('dahi-handi-container');
+        let clicks = 0;
+        const clicksNeeded = 15;
+        let gameActive = false;
+        
+        dahiHandi.addEventListener('click', () => {
+            if (!gameActive) return;
+            clicks++;
+            handiClicksEl.textContent = clicks;
+            dahiHandi.style.transform = `translateX(-50%) scale(1.05) rotate(${Math.random() * 6 - 3}deg)`;
+            setTimeout(() => { dahiHandi.style.transform = 'translateX(-50%)'; }, 80);
+            if (clicks >= clicksNeeded) { endGame(true); }
+        });
+
+        startGameBtn.addEventListener('click', () => {
+            clicks = 0; gameActive = true;
+            handiClicksEl.textContent = clicks;
+            gameMessage.classList.add('hidden');
+            handiContainer.classList.remove('hidden');
+            startGameBtn.disabled = true;
+            startGameBtn.textContent = '...';
+            
+            setTimeout(() => { if (gameActive) { endGame(false); } }, 10000);
+        });
+
+        async function endGame(won) {
+            gameActive = false;
+            startGameBtn.disabled = false;
+            startGameBtn.textContent = 'Play Again';
+            handiContainer.classList.add('hidden');
+            
+            if (won) {
+                gameMessage.textContent = 'Victory!';
+                triggerConfetti();
+                await initializeAudio();
+                if(winSound.loaded) winSound.start();
+            } else {
+                gameMessage.textContent = 'So Close!';
+            }
+            gameMessage.classList.remove('hidden');
+        }
+        
+        const openGiftBtn = document.getElementById('open-gift-btn');
+        const closeBtn = document.getElementById('close-modal-btn');
+        const modal = document.getElementById('gift-modal');
+        const modalContent = modal.querySelector('.modal-content');
+        
+        const openModal = () => {
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+        };
+
+        const closeModal = () => {
+            modalContent.classList.add('scale-95', 'opacity-0');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('pointer-events-none'), 300);
+        };
+        
+        openGiftBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        createStars();
+    });
+</script>
+</body>
+</html>
